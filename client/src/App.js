@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import ResumeForm from './components/ResumeForm';
 import ProtectedRoute from './components/ProtectedRoute';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<h1>Landing Page</h1>} />
+        <Route path="/" element={<Home />} />
         {/* Protected Routes are defined below */}
         <Route path = "/resume" element={<ProtectedRoute><ResumeForm /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
