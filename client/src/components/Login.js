@@ -18,6 +18,11 @@ const Login = () => {
       const res = await axios.post('http://localhost:5000/api/auth/login', form);
       localStorage.setItem('userId', res.data.user._id);
       alert("Welcome " + res.data.user.name);
+      const loginTime = new Date().getTime();
+      const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
+
+      localStorage.setItem('loginTime', loginTime);
+      localStorage.setItem('sessionExpiry', sessionDuration);
       window.location.href = "/dashboard";
     } catch (err) {
       alert(err.response.data.message || "Login failed");

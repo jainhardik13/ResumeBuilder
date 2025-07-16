@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import LivePreview from './LivePreview';
 
 const ResumeForm = () => {
   const [userId] = useState(localStorage.getItem('userId') || '');
@@ -53,6 +54,7 @@ const ResumeForm = () => {
         ...formData
       });
       alert(res.data.message);
+      window.location.href = '/dashboard';
     } catch (err) {
       alert('Failed to save resume');
     }
@@ -75,7 +77,9 @@ const ResumeForm = () => {
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Create or Edit Your Resume</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <div style={styles.page}>
+        <div style={styles.left}>
+          <form onSubmit={handleSubmit} style={styles.form}>
         {/* Personal Info */}
         <section style={styles.section}>
           <h3 style={styles.subHeading}>Personal Information</h3>
@@ -258,6 +262,12 @@ const ResumeForm = () => {
         <button type='submit' style={styles.button}>Save Resume</button>
       </form>
     </div>
+
+    <div style={styles.right}>
+      <LivePreview resume={formData} />
+    </div>
+  </div>
+</div>
   );
 };
 
@@ -269,6 +279,21 @@ const styles = {
     fontFamily: 'Segoe UI, sans-serif',
     color: '#fff'
   },
+  page: {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '40px',
+  alignItems: 'flex-start'
+},
+left: {
+  flex: 1,
+  minWidth: '320px'
+},
+right: {
+  flex: 1,
+  minWidth: '320px',
+  maxWidth: '600px'
+},
   heading: {
     fontSize: '32px',
     fontWeight: 'bold',
@@ -281,8 +306,7 @@ const styles = {
     borderRadius: '12px',
     padding: '30px',
     boxShadow: '0 8px 20px rgba(0,0,0,0.1)',
-    maxWidth: '800px',
-    margin: '0 auto'
+    height: 'fit-content'
   },
   section: {
     marginBottom: '30px'
